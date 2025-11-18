@@ -18,34 +18,34 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: #f5f1e8;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 16px 180px;
             color: #3d2817;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 50px;
-            border-bottom: 3px solid #c9a961;
-            padding-bottom: 30px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #c9a961;
+            padding-bottom: 10px;
         }
 
         h1 {
             font-family: 'Playfair Display', 'Georgia', serif;
-            font-size: 4rem;
-            margin-bottom: 15px;
+            font-size: 2.5rem;
+            margin-bottom: 6px;
             color: #3d2817;
             font-weight: 900;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
             text-transform: uppercase;
         }
 
         .subtitle {
-            font-size: 1.3rem;
+            font-size: 0.95rem;
             color: #6d5d4b;
             font-weight: 400;
         }
@@ -53,14 +53,17 @@
         .filters-section {
             background: #fdfcf9;
             border: 2px solid #d4c4a8;
-            border-radius: 16px;
-            padding: 35px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 20px rgba(61, 40, 23, 0.08);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 16px;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            box-shadow: 0 2px 12px rgba(61, 40, 23, 0.08);
         }
 
         .filter-group {
-            margin-bottom: 25px;
+            margin-bottom: 12px;
         }
 
         .filter-group:last-child {
@@ -70,31 +73,32 @@
         .filter-label {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
             color: #3d2817;
             display: flex;
             align-items: center;
-            gap: 10px;
-            letter-spacing: 0.5px;
+            gap: 6px;
+            letter-spacing: 0.3px;
         }
 
         .filter-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 6px;
         }
 
         .filter-tag {
-            padding: 10px 18px;
-            border-radius: 20px;
+            padding: 3px 8px;
+            border-radius: 10px;
             background: #f5f1e8;
             border: 1.5px solid #d4c4a8;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            font-size: 0.65rem;
             color: #6d5d4b;
             font-weight: 500;
+            position: relative;
         }
 
         .filter-tag:hover {
@@ -113,10 +117,10 @@
 
         .search-box {
             width: 100%;
-            padding: 14px 20px;
+            padding: 7px 10px;
             border: 2px solid #d4c4a8;
-            border-radius: 12px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
             font-family: 'Inter', sans-serif;
             background: #fdfcf9;
             color: #3d2817;
@@ -139,24 +143,24 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 0;
         }
 
         .count {
-            font-size: 1.2rem;
+            font-size: 0.8rem;
             color: #6d5d4b;
             font-weight: 600;
             font-family: 'Playfair Display', serif;
         }
 
         .clear-filters {
-            padding: 12px 28px;
+            padding: 6px 14px;
             background: #8b6f47;
             color: #fdfcf9;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.75rem;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
             transition: all 0.3s;
@@ -171,43 +175,43 @@
 
         .posts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 14px;
         }
 
         .post-card {
             background: #fdfcf9;
             border: 2px solid #e8dfc8;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 2px 12px rgba(61, 40, 23, 0.06);
+            border-radius: 10px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(61, 40, 23, 0.06);
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
         }
 
         .post-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(61, 40, 23, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(61, 40, 23, 0.12);
             border-color: #d4c4a8;
         }
 
         .post-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: #3d2817;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             line-height: 1.3;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.2px;
         }
 
         .post-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
-            font-size: 0.95rem;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
             color: #8b7d6b;
         }
 
@@ -225,12 +229,12 @@
             transform: translateX(-50%) translateY(-8px);
             background: #3d2817;
             color: #fdfcf9;
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 0.85rem;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
             font-weight: 400;
-            line-height: 1.5;
-            width: 280px;
+            line-height: 1.4;
+            width: 260px;
             max-width: 90vw;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             pointer-events: none;
@@ -255,23 +259,35 @@
             transform: translateX(-50%) translateY(-12px);
         }
 
+        /* Tooltips hidden by default */
+        .filter-tag .author-tooltip {
+            display: none;
+        }
+
+        /* Show tooltips when descriptions are enabled */
+        body.descriptions-enabled .filter-tag:hover .author-tooltip {
+            display: block;
+            opacity: 1;
+            transform: translateX(-50%) translateY(-12px);
+        }
+
         .post-date {
             color: #a89680;
-            font-size: 0.9rem;
+            font-size: 0.75rem;
         }
 
         .post-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 5px;
             margin-top: auto;
         }
 
         .post-tag {
-            padding: 6px 14px;
-            border-radius: 16px;
+            padding: 3px 8px;
+            border-radius: 10px;
             background: #ebe5d6;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             color: #6d5d4b;
             font-weight: 500;
             border: 1px solid #d4c4a8;
@@ -318,17 +334,17 @@
         }
 
         .add-tag-btn {
-            padding: 8px 18px;
+            padding: 5px 12px;
             background: #8b6f47;
             color: #fdfcf9;
             border: none;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            border-radius: 5px;
+            font-size: 0.75rem;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            margin-left: 10px;
+            margin-left: 6px;
             letter-spacing: 0.3px;
         }
 
@@ -339,13 +355,13 @@
         }
 
         .tag-input {
-            padding: 8px 14px;
+            padding: 5px 8px;
             border: 1.5px solid #d4c4a8;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            border-radius: 5px;
+            font-size: 0.75rem;
             font-family: 'Inter', sans-serif;
-            margin-left: 10px;
-            width: 170px;
+            margin-left: 6px;
+            width: 130px;
             background: #fdfcf9;
             color: #3d2817;
         }
@@ -362,30 +378,40 @@
 
         .empty-state {
             text-align: center;
-            padding: 80px 20px;
+            padding: 30px 20px;
             color: #6d5d4b;
-            font-size: 1.3rem;
+            font-size: 1rem;
             font-family: 'Playfair Display', serif;
             font-style: italic;
         }
 
         .loading {
             text-align: center;
-            padding: 80px 20px;
+            padding: 30px 20px;
             color: #8b6f47;
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             font-family: 'Playfair Display', serif;
             font-style: italic;
         }
 
+        @media (max-width: 1200px) {
+            body {
+                padding: 16px 80px;
+            }
+        }
+
         @media (max-width: 768px) {
+            body {
+                padding: 16px 20px;
+            }
+
             h1 {
-                font-size: 2.5rem;
-                letter-spacing: -0.5px;
+                font-size: 2rem;
+                letter-spacing: -0.4px;
             }
 
             .subtitle {
-                font-size: 1.1rem;
+                font-size: 0.9rem;
             }
 
             .posts-grid {
@@ -394,15 +420,15 @@
 
             .stats {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
             }
 
             .filter-label {
-                font-size: 1.1rem;
+                font-size: 0.85rem;
             }
 
             .post-title {
-                font-size: 1.3rem;
+                font-size: 1.05rem;
             }
         }
     </style>
@@ -430,8 +456,12 @@
             </div>
 
             <div class="filter-group">
-                <div class="filter-label">
-                    Filter by Author
+                <div class="filter-label" style="display: flex; align-items: center; justify-content: space-between;">
+                    <span>Filter by Author</span>
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 400; cursor: pointer;">
+                        <input type="checkbox" id="descriptionsToggle" style="cursor: pointer;">
+                        <span>Show hover-over descriptions</span>
+                    </label>
                 </div>
                 <div id="authorFilters" class="filter-tags"></div>
             </div>
@@ -480,6 +510,16 @@
                     if (searchBox) {
                         searchBox.value = searchQuery;
                     }
+                    
+                    // Restore descriptions toggle (default: false/off)
+                    const descriptionsEnabled = filters.descriptionsEnabled || false;
+                    const toggle = document.getElementById('descriptionsToggle');
+                    if (toggle) {
+                        toggle.checked = descriptionsEnabled;
+                        if (descriptionsEnabled) {
+                            document.body.classList.add('descriptions-enabled');
+                        }
+                    }
                 }
             } catch (e) {
                 console.error('Error loading saved filters:', e);
@@ -489,11 +529,13 @@
         // Save current filters to localStorage
         function saveFilters() {
             try {
+                const toggle = document.getElementById('descriptionsToggle');
                 const filters = {
                     tags: Array.from(selectedTags),
                     authors: Array.from(selectedAuthors),
                     communityTags: Array.from(selectedCommunityTags),
-                    searchQuery: searchQuery
+                    searchQuery: searchQuery,
+                    descriptionsEnabled: toggle ? toggle.checked : false
                 };
                 localStorage.setItem('inkhavenFilters', JSON.stringify(filters));
             } catch (e) {
@@ -568,9 +610,11 @@
                 `<div class="filter-tag" data-tag="${tag}">${tag}</div>`
             ).join('');
 
-            authorFilters.innerHTML = authors.map(author => 
-                `<div class="filter-tag" data-author="${author}">${author}</div>`
-            ).join('');
+            authorFilters.innerHTML = authors.map(author => {
+                const bio = authorBios[author];
+                const tooltip = bio ? `<span class="author-tooltip">${bio}</span>` : '';
+                return `<div class="filter-tag" data-author="${author}">${author}${tooltip}</div>`;
+            }).join('');
 
             communityTagFilters.innerHTML = communityTags.length > 0 
                 ? communityTags.map(tag => 
@@ -727,7 +771,7 @@
                             ${aiTags}
                             ${communityTags}
                         </div>
-                        <div style="margin-top: 18px; padding-top: 18px; border-top: 2px solid #e8dfc8; display: flex; align-items: center; gap: 0;">
+                        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e8dfc8; display: flex; align-items: center; gap: 0;">
                             <input type="text" 
                                    placeholder="Add your own tag..." 
                                    class="tag-input" 
@@ -761,6 +805,16 @@
             document.querySelectorAll('.filter-tag').forEach(el => el.classList.remove('active'));
             saveFilters();
             renderPosts();
+        });
+
+        // Add event listener for descriptions toggle
+        document.getElementById('descriptionsToggle').addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.body.classList.add('descriptions-enabled');
+            } else {
+                document.body.classList.remove('descriptions-enabled');
+            }
+            saveFilters();
         });
 
         // Load saved filters and then load data on page load
