@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inkhaven Post Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f1e8;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #3d2817;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 3px solid #c9a961;
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: #3d2817;
+            font-weight: 900;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #6d5d4b;
+            font-weight: 400;
+        }
+
+        .filters-section {
+            background: #fdfcf9;
+            border: 2px solid #d4c4a8;
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(61, 40, 23, 0.08);
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+        }
+
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-label {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #3d2817;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-tag {
+            padding: 10px 18px;
+            border-radius: 20px;
+            background: #f5f1e8;
+            border: 1.5px solid #d4c4a8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            color: #6d5d4b;
+            font-weight: 500;
+        }
+
+        .filter-tag:hover {
+            background: #ebe5d6;
+            border-color: #c9a961;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(61, 40, 23, 0.15);
+        }
+
+        .filter-tag.active {
+            background: #c9a961;
+            color: #fdfcf9;
+            border-color: #b8965a;
+            box-shadow: 0 3px 12px rgba(201, 169, 97, 0.3);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #d4c4a8;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background: #fdfcf9;
+            color: #3d2817;
+            transition: all 0.3s;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #c9a961;
+            box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+            background: white;
+        }
+
+        .search-box::placeholder {
+            color: #a89680;
+            font-style: italic;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .count {
+            font-size: 1.2rem;
+            color: #6d5d4b;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .clear-filters {
+            padding: 12px 28px;
+            background: #8b6f47;
+            color: #fdfcf9;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s;
+            letter-spacing: 0.3px;
+        }
+
+        .clear-filters:hover {
+            background: #6d5d4b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(61, 40, 23, 0.2);
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .post-card {
+            background: #fdfcf9;
+            border: 2px solid #e8dfc8;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 2px 12px rgba(61, 40, 23, 0.06);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(61, 40, 23, 0.12);
+            border-color: #d4c4a8;
+        }
+
+        .post-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3d2817;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            letter-spacing: -0.3px;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+            color: #8b7d6b;
+        }
+
+        .post-author {
+            font-weight: 600;
+            color: #8b6f47;
+        }
+
+        .post-date {
+            color: #a89680;
+            font-size: 0.9rem;
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .post-tag {
+            padding: 6px 14px;
+            border-radius: 16px;
+            background: #ebe5d6;
+            font-size: 0.85rem;
+            color: #6d5d4b;
+            font-weight: 500;
+            border: 1px solid #d4c4a8;
+            letter-spacing: 0.2px;
+        }
+
+        .post-tag.ai-safety { background: #d4e4f7; color: #2c5282; border-color: #b8d0ea; }
+        .post-tag.technical-ml { background: #c9ddf5; color: #1e3a5f; border-color: #a8c5e6; }
+        .post-tag.mathematics { background: #d1e7dd; color: #2d5a3f; border-color: #b5d6c8; }
+        .post-tag.statistics { background: #cce5e9; color: #2c5560; border-color: #b0d4db; }
+        .post-tag.biology { background: #dfe9d5; color: #3d5a2c; border-color: #c8ddb8; }
+        .post-tag.physics { background: #d8e7e4; color: #2e5249; border-color: #bfd9d4; }
+        .post-tag.chemistry { background: #dbe8df; color: #325a3d; border-color: #c2dcc9; }
+        .post-tag.philosophy { background: #f0d9df; color: #6b3744; border-color: #dfc2cb; }
+        .post-tag.moral-philosophy { background: #edd6e0; color: #653546; border-color: #d9c0cd; }
+        .post-tag.technology { background: #e5ddef; color: #4a3961; border-color: #d1c5dd; }
+        .post-tag.programming { background: #ddd5ea; color: #3f2f56; border-color: #c8bed9; }
+        .post-tag.politics { background: #f3e8d1; color: #6d5230; border-color: #e0d4bb; }
+        .post-tag.economics { background: #f0dfc7; color: #6b4e2d; border-color: #dccdb3; }
+        .post-tag.society { background: #f4e9d5; color: #6e5635; border-color: #e1d6c0; }
+        .post-tag.personal { background: #f2dde0; color: #6a3a3f; border-color: #dfc9cd; }
+        .post-tag.life-advice { background: #efdadd; color: #663840; border-color: #dac6ca; }
+        .post-tag.rationality { background: #dde3f0; color: #3d4a66; border-color: #c8d1e2; }
+        .post-tag.epistemology { background: #e2dcef; color: #4b3d66; border-color: #cec5dd; }
+        .post-tag.history { background: #efe0cc; color: #6a5030; border-color: #dacbb5; }
+        .post-tag.art { background: #eedce9; color: #63375a; border-color: #d9c7d4; }
+        .post-tag.literature { background: #ecd9e7; color: #5f3456; border-color: #d6c3d1; }
+        .post-tag.music { background: #eddde9; color: #623858; border-color: #d8c8d4; }
+        .post-tag.psychology { background: #ecdadf; color: #5f3440; border-color: #d6c5ca; }
+        .post-tag.neuroscience { background: #dee3ef; color: #3f4963; border-color: #c9d1de; }
+        .post-tag.religion { background: #f3e7d1; color: #6d5431; border-color: #e0d3bb; }
+        .post-tag.education { background: #f3eacd; color: #706130; border-color: #dfd9b8; }
+        .post-tag.science-fiction { background: #e1dcef; color: #493d66; border-color: #cdc5dd; }
+        .post-tag.games { background: #f0d8d8; color: #6b3535; border-color: #dbc3c3; }
+        .post-tag.humor { background: #f3e6cf; color: #6f5832; border-color: #ded2b9; }
+        .post-tag.travel { background: #d6e5f4; color: #2f5078; border-color: #bed2e6; }
+
+        .post-tag.community {
+            background: linear-gradient(135deg, #c9a961 0%, #b8965a 100%);
+            color: #fdfcf9;
+            font-weight: 600;
+            border: 2px solid #b8965a;
+            box-shadow: 0 2px 8px rgba(201, 169, 97, 0.25);
+        }
+
+        .add-tag-btn {
+            padding: 8px 18px;
+            background: #8b6f47;
+            color: #fdfcf9;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-left: 10px;
+            letter-spacing: 0.3px;
+        }
+
+        .add-tag-btn:hover {
+            background: #6d5d4b;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(61, 40, 23, 0.2);
+        }
+
+        .tag-input {
+            padding: 8px 14px;
+            border: 1.5px solid #d4c4a8;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            margin-left: 10px;
+            width: 170px;
+            background: #fdfcf9;
+            color: #3d2817;
+        }
+
+        .tag-input:focus {
+            outline: none;
+            border-color: #c9a961;
+            box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+        }
+
+        .tag-input::placeholder {
+            color: #a89680;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #6d5d4b;
+            font-size: 1.3rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 80px 20px;
+            color: #8b6f47;
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                letter-spacing: -0.5px;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .filter-label {
+                font-size: 1.1rem;
+            }
+
+            .post-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The Inkhaven Residency</h1>
+            <p class="subtitle">Post Explorer</p>
+        </header>
+
+        <div class="filters-section">
+            <div class="filter-group">
+                <div class="filter-label">
+                    Search
+                </div>
+                <input type="text" id="searchBox" class="search-box" placeholder="Search by title...">
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-label">
+                    Filter by Tag
+                </div>
+                <div id="tagFilters" class="filter-tags"></div>
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-label">
+                    Filter by Author
+                </div>
+                <div id="authorFilters" class="filter-tags"></div>
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-label" style="cursor: pointer; user-select: none;" onclick="toggleCommunityTags()">
+                    Community-Contributed Tags <span id="communityToggle">▼</span>
+                </div>
+                <div id="communityTagsSection" style="display: none;">
+                    <div id="communityTagFilters" class="filter-tags"></div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="count" id="postCount">Loading posts...</div>
+                <button class="clear-filters" id="clearFilters">Clear All Filters</button>
+            </div>
+        </div>
+
+        <div id="postsContainer">
+            <div class="loading">Loading posts...</div>
+        </div>
+    </div>
+
+    <script>
+        let allPosts = [];
+        let selectedTags = new Set();
+        let selectedAuthors = new Set();
+        let selectedCommunityTags = new Set();
+        let searchQuery = '';
+
+        // Load saved filters from localStorage
+        function loadSavedFilters() {
+            try {
+                const saved = localStorage.getItem('inkhavenFilters');
+                if (saved) {
+                    const filters = JSON.parse(saved);
+                    selectedTags = new Set(filters.tags || []);
+                    selectedAuthors = new Set(filters.authors || []);
+                    selectedCommunityTags = new Set(filters.communityTags || []);
+                    searchQuery = filters.searchQuery || '';
+                    
+                    // Restore search box value
+                    const searchBox = document.getElementById('searchBox');
+                    if (searchBox) {
+                        searchBox.value = searchQuery;
+                    }
+                }
+            } catch (e) {
+                console.error('Error loading saved filters:', e);
+            }
+        }
+
+        // Save current filters to localStorage
+        function saveFilters() {
+            try {
+                const filters = {
+                    tags: Array.from(selectedTags),
+                    authors: Array.from(selectedAuthors),
+                    communityTags: Array.from(selectedCommunityTags),
+                    searchQuery: searchQuery
+                };
+                localStorage.setItem('inkhavenFilters', JSON.stringify(filters));
+            } catch (e) {
+                console.error('Error saving filters:', e);
+            }
+        }
+
+        // Fetch data from API
+        async function loadData() {
+            // Use relative URLs so it works in both development and production
+            try {
+                const [postsRes, tagsRes, authorsRes, communityTagsRes] = await Promise.all([
+                    fetch('/api/posts'),
+                    fetch('/api/tags'),
+                    fetch('/api/authors'),
+                    fetch('/api/community-tags')
+                ]);
+
+                allPosts = await postsRes.json();
+                const tags = await tagsRes.json();
+                const authors = await authorsRes.json();
+                const communityTags = await communityTagsRes.json();
+
+                renderFilters(tags, authors, communityTags);
+                renderPosts();
+            } catch (error) {
+                document.getElementById('postsContainer').innerHTML = 
+                    '<div class="empty-state">Error loading posts. Make sure the server is running!</div>';
+            }
+        }
+
+        function toggleCommunityTags() {
+            const section = document.getElementById('communityTagsSection');
+            const toggle = document.getElementById('communityToggle');
+            if (section.style.display === 'none') {
+                section.style.display = 'block';
+                toggle.textContent = '▲';
+            } else {
+                section.style.display = 'none';
+                toggle.textContent = '▼';
+            }
+        }
+
+        async function addCommunityTag(postId, tag) {
+            try {
+                const response = await fetch(`/api/community-tags/${encodeURIComponent(postId)}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ tag })
+                });
+                
+                if (response.ok) {
+                    // Reload data to show new tag
+                    await loadData();
+                }
+            } catch (error) {
+                console.error('Error adding tag:', error);
+            }
+        }
+
+        // Render filter buttons
+        function renderFilters(tags, authors, communityTags) {
+            const tagFilters = document.getElementById('tagFilters');
+            const authorFilters = document.getElementById('authorFilters');
+            const communityTagFilters = document.getElementById('communityTagFilters');
+
+            tagFilters.innerHTML = tags.map(tag => 
+                `<div class="filter-tag" data-tag="${tag}">${tag}</div>`
+            ).join('');
+
+            authorFilters.innerHTML = authors.map(author => 
+                `<div class="filter-tag" data-author="${author}">${author}</div>`
+            ).join('');
+
+            communityTagFilters.innerHTML = communityTags.length > 0 
+                ? communityTags.map(tag => 
+                    `<div class="filter-tag" data-community-tag="${tag}">${tag}</div>`
+                  ).join('')
+                : '<p style="color: #999; font-size: 0.9rem;">No community tags yet. Add tags to posts below!</p>';
+
+            // Add click listeners for AI tags
+            tagFilters.querySelectorAll('.filter-tag').forEach(el => {
+                const tag = el.dataset.tag;
+                
+                // Restore active state if tag was previously selected
+                if (selectedTags.has(tag)) {
+                    el.classList.add('active');
+                }
+                
+                el.addEventListener('click', () => {
+                    if (selectedTags.has(tag)) {
+                        selectedTags.delete(tag);
+                        el.classList.remove('active');
+                    } else {
+                        selectedTags.add(tag);
+                        el.classList.add('active');
+                    }
+                    saveFilters();
+                    renderPosts();
+                });
+            });
+
+            // Add click listeners for authors
+            authorFilters.querySelectorAll('.filter-tag').forEach(el => {
+                const author = el.dataset.author;
+                
+                // Restore active state if author was previously selected
+                if (selectedAuthors.has(author)) {
+                    el.classList.add('active');
+                }
+                
+                el.addEventListener('click', () => {
+                    if (selectedAuthors.has(author)) {
+                        selectedAuthors.delete(author);
+                        el.classList.remove('active');
+                    } else {
+                        selectedAuthors.add(author);
+                        el.classList.add('active');
+                    }
+                    saveFilters();
+                    renderPosts();
+                });
+            });
+
+            // Add click listeners for community tags
+            communityTagFilters.querySelectorAll('.filter-tag').forEach(el => {
+                const tag = el.dataset.communityTag;
+                
+                // Restore active state if tag was previously selected
+                if (selectedCommunityTags.has(tag)) {
+                    el.classList.add('active');
+                }
+                
+                el.addEventListener('click', () => {
+                    if (selectedCommunityTags.has(tag)) {
+                        selectedCommunityTags.delete(tag);
+                        el.classList.remove('active');
+                    } else {
+                        selectedCommunityTags.add(tag);
+                        el.classList.add('active');
+                    }
+                    saveFilters();
+                    renderPosts();
+                });
+            });
+        }
+
+        // Filter and render posts
+        function renderPosts() {
+            const filtered = allPosts.filter(post => {
+                // Filter by AI tags
+                if (selectedTags.size > 0) {
+                    const postTags = post.tags || [];
+                    if (!postTags.some(tag => selectedTags.has(tag))) {
+                        return false;
+                    }
+                }
+
+                // Filter by community tags
+                if (selectedCommunityTags.size > 0) {
+                    const communityTags = post.community_tags || [];
+                    if (!communityTags.some(tag => selectedCommunityTags.has(tag))) {
+                        return false;
+                    }
+                }
+
+                // Filter by authors
+                if (selectedAuthors.size > 0) {
+                    if (!selectedAuthors.has(post.author)) {
+                        return false;
+                    }
+                }
+
+                // Filter by search query
+                if (searchQuery) {
+                    const title = post.title.toLowerCase();
+                    if (!title.includes(searchQuery.toLowerCase())) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
+            const container = document.getElementById('postsContainer');
+            const countEl = document.getElementById('postCount');
+
+            countEl.textContent = `${filtered.length} post${filtered.length !== 1 ? 's' : ''} found`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state">No posts match your filters</div>';
+                return;
+            }
+
+            container.innerHTML = `<div class="posts-grid">${filtered.map(post => {
+                const date = new Date(post.date_modified).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+
+                const aiTags = (post.tags || []).map(tag => 
+                    `<span class="post-tag ${tag}">${tag}</span>`
+                ).join('');
+
+                const communityTags = (post.community_tags || []).map(tag => 
+                    `<span class="post-tag community">${tag}</span>`
+                ).join('');
+
+                const postId = post.id;
+
+                return `
+                    <div class="post-card">
+                        <div onclick="window.open('${post.url}', '_blank')" style="cursor: pointer;">
+                            <div class="post-title">${post.title}</div>
+                            <div class="post-meta">
+                                <span class="post-author">${post.author}</span>
+                                <span class="post-date">${date}</span>
+                            </div>
+                        </div>
+                        <div class="post-tags">
+                            ${aiTags}
+                            ${communityTags}
+                        </div>
+                        <div style="margin-top: 18px; padding-top: 18px; border-top: 2px solid #e8dfc8; display: flex; align-items: center; gap: 0;">
+                            <input type="text" 
+                                   placeholder="Add your own tag..." 
+                                   class="tag-input" 
+                                   id="input-${btoa(postId).replace(/=/g, '')}"
+                                   onclick="event.stopPropagation()"
+                                   onkeypress="if(event.key==='Enter'){event.stopPropagation(); addCommunityTag('${postId.replace(/'/g, "\\'")}', this.value); this.value='';}">
+                            <button class="add-tag-btn" 
+                                    onclick="event.stopPropagation(); const input = document.getElementById('input-${btoa(postId).replace(/=/g, '')}'); addCommunityTag('${postId.replace(/'/g, "\\'")}', input.value); input.value='';">
+                                Add Tag
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('')}</div>`;
+        }
+
+        // Search box listener
+        document.getElementById('searchBox').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            saveFilters();
+            renderPosts();
+        });
+
+        // Clear filters button
+        document.getElementById('clearFilters').addEventListener('click', () => {
+            selectedTags.clear();
+            selectedAuthors.clear();
+            selectedCommunityTags.clear();
+            searchQuery = '';
+            document.getElementById('searchBox').value = '';
+            document.querySelectorAll('.filter-tag').forEach(el => el.classList.remove('active'));
+            saveFilters();
+            renderPosts();
+        });
+
+        // Load saved filters and then load data on page load
+        loadSavedFilters();
+        loadData();
+    </script>
+</body>
+</html>
+

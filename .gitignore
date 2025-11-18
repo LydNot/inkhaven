@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.log
+.env
+.env.local
+.venv
+venv/
+
+# Sensitive files - NEVER commit these
+*.key
+*_key.txt
+secrets.txt
+
+# Note: ANTHROPIC_API_KEY should only be set as an environment variable
+# NEVER commit it to the repository!
+
