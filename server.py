@@ -97,6 +97,14 @@ def get_authors():
             authors.add(author)
     return jsonify(sorted(list(authors)))
 
+@app.route('/api/author-bios')
+def get_author_bios():
+    """Get AI-generated author bios"""
+    if os.path.exists('author_bios.json'):
+        with open('author_bios.json', 'r') as f:
+            return jsonify(json.load(f))
+    return jsonify({})
+
 @app.route('/')
 def index():
     """Serve the main page"""

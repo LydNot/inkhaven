@@ -214,6 +214,45 @@
         .post-author {
             font-weight: 600;
             color: #8b6f47;
+            position: relative;
+            cursor: help;
+        }
+
+        .author-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: #3d2817;
+            color: #fdfcf9;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            line-height: 1.5;
+            width: 280px;
+            max-width: 90vw;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            z-index: 1000;
+            text-align: left;
+        }
+
+        .author-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #3d2817;
+        }
+
+        .post-author:hover .author-tooltip {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-12px);
         }
 
         .post-date {
@@ -419,6 +458,7 @@
 
     <script>
         let allPosts = [];
+        let authorBios = {};
         let selectedTags = new Set();
         let selectedAuthors = new Set();
         let selectedCommunityTags = new Set();
@@ -465,17 +505,19 @@
         async function loadData() {
             // Use relative URLs so it works in both development and production
             try {
-                const [postsRes, tagsRes, authorsRes, communityTagsRes] = await Promise.all([
+                const [postsRes, tagsRes, authorsRes, communityTagsRes, biosRes] = await Promise.all([
                     fetch('/api/posts'),
                     fetch('/api/tags'),
                     fetch('/api/authors'),
-                    fetch('/api/community-tags')
+                    fetch('/api/community-tags'),
+                    fetch('/api/author-bios')
                 ]);
 
                 allPosts = await postsRes.json();
                 const tags = await tagsRes.json();
                 const authors = await authorsRes.json();
                 const communityTags = await communityTagsRes.json();
+                authorBios = await biosRes.json();
 
                 renderFilters(tags, authors, communityTags);
                 renderPosts();
@@ -667,12 +709,17 @@
 
                 const postId = post.id;
 
+                const authorBio = authorBios[post.author];
+                const authorHtml = authorBio 
+                    ? `<span class="post-author">${post.author}<span class="author-tooltip">${authorBio}</span></span>`
+                    : `<span class="post-author">${post.author}</span>`;
+
                 return `
                     <div class="post-card">
                         <div onclick="window.open('${post.url}', '_blank')" style="cursor: pointer;">
                             <div class="post-title">${post.title}</div>
                             <div class="post-meta">
-                                <span class="post-author">${post.author}</span>
+                                ${authorHtml}
                                 <span class="post-date">${date}</span>
                             </div>
                         </div>
