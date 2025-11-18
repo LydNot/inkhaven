@@ -4839,5 +4839,83 @@
       "philosophy",
       "history"
     ]
+  },
+  "https://open.substack.com/pub/bengoldhaber/p/automating-5-years-of-link-extraction?r=tli1&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true": {
+    "title": "Automating 5 Years of Link Extraction with Claude Code",
+    "url": "https://open.substack.com/pub/bengoldhaber/p/automating-5-years-of-link-extraction?r=tli1&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true",
+    "author": "Ben Goldhaber",
+    "date_modified": "2025-11-08T00:00:00.000Z",
+    "tags": [
+      "ai-safety",
+      "programming",
+      "technology",
+      "personal"
+    ]
+  },
+  "https://befriendjamin.substack.com/p/memoirs-of-famous-comedians": {
+    "title": "Memoirs of Famous Comedians",
+    "url": "https://befriendjamin.substack.com/p/memoirs-of-famous-comedians",
+    "author": "Ben Steinhorn",
+    "date_modified": "2025-11-08T00:00:00.000Z",
+    "tags": [
+      "humor",
+      "literature",
+      "personal"
+    ]
+  },
+  "https://camilleberger.substack.com/p/i-am-he-who-unthreads-the-worlds": {
+    "title": "I Am He Who Unthreads The Worlds",
+    "url": "https://camilleberger.substack.com/p/i-am-he-who-unthreads-the-worlds",
+    "author": "Camille Berger",
+    "date_modified": "2025-11-08T00:00:00.000Z",
+    "tags": [
+      "philosophy",
+      "literature",
+      "personal"
+    ]
+  },
+  "https://mingyuan.substack.com/p/a-sonnet-a-sestina-a-villanelle": {
+    "title": "A sonnet, a sestina, a villanelle",
+    "url": "https://mingyuan.substack.com/p/a-sonnet-a-sestina-a-villanelle",
+    "author": "Claire Wang",
+    "date_modified": "2025-11-08T00:00:00.000Z",
+    "tags": [
+      "literature",
+      "art",
+      "personal"
+    ]
+  },
+  "https://croissanthology.com/motley": {
+    "title": "Motley ideas",
+    "url": "https://croissanthology.com/motley",
+    "author": "Croissanthology",
+    "date_modified": "2025-11-08T00:00:00.000Z",
+    "tags": [
+      "personal",
+      "rationality"
+    ]
+  },
+  "https://randomfeatures.substack.com/p/prioritize-the-base-of-the-maslows": {
+    "title": "Prioritize the base of the Maslow\u2019s hierarchy",
+    "url": "https://randomfeatures.substack.com/p/prioritize-the-base-of-the-maslows",
+    "author": "Daniel Paleka",
+    "date_modified": "2025-11-08T00:00:00.000Z",
+    "tags": [
+      "psychology",
+      "life-advice",
+      "rationality"
+    ]
+  },
+  "https://dactile.net/p/vibe-data-viz-guide": {
+    "title": "A Draft Guide to Vibecoding Data Visualizations and Analysis",
+    "url": "https://dactile.net/p/vibe-data-viz-guide",
+    "author": "David Gros",
+    "date_modified": "2025-11-08T00:00:00.000Z",
+    "tags": [
+      "programming",
+      "statistics",
+      "rationality",
+      "technology"
+    ]
   }
 }
